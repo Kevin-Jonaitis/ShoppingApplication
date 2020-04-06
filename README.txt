@@ -22,12 +22,13 @@ to showcase my coding skills :D
 nor has complex queries(and probably wont be in the future) so no need for SQL.
 
 #How to run
--go to the top level ShoppingApplication directory and run:
+
+Download docker-compose.yml, and then in the same directory run:
 docker-compose up
--this should bring up all 3 containers(frontend, backend, db). I had some problems
-with configuring the frontend to point to the backend server.
+-This should bring up all 3 containers(frontend, backend, db). I had some problems
+with configuring the frontend to point to the backend server automatically.
 You can tell it's misconfigured because the "items" tab wont show anything. If that's the case,
-please check the ip of the docker box using:
+please check the ip that docker is using:
 docker-machine ip
 and then set line 27 in the docker-compose.yml to that ip:
 #      REACT_APP_BACKEND_URL: http://<newIp>:8080
