@@ -1,10 +1,12 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import ItemList from './ItemList';
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 const AUTH_TOKEN = 'authtoken';
 
 let config = { headers: { authtoken : localStorage.getItem(AUTH_TOKEN)  }}
+console.log("TESTING");
+console.log(process.env.REACT_APP_BACKEND_URL);
+console.log(process.env);
 
 export function getItems() {
         return axios.get(`${BASE_URL}/items`)

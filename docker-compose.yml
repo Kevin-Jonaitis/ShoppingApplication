@@ -1,0 +1,48 @@
+version: '3.7'
+
+# Define services
+services:
+  # App backend service
+  app-server:
+    image: kevin117007/shoppingapp:bakend
+    environment: # Pass environment variables to the service
+      SPRING_DATA_MONGODB_URI: mongodb://db:27017/test
+    # Configuration for building the docker image for the backend service
+    # build:
+      # context: ShoppingBackend # Use an image built from the specified dockerfile in the `shopping-backend` directory.
+      # dockerfile: Dockerfile
+    ports:
+      - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
+    restart: always
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - backend
+      - frontend
+    depends_on: 
+      - db # This service depends on mongodb. Start that first.
+
+# Frontend Service 
+  app-client:
+    image: kevin117007/shoppingapp:frontend
+    environment:
+      # CHANGE THIS HOST VALUE TO WHATEVER `docker-machine ip` outputs. ie http://<correctIp>:8080
+      REACT_APP_BACKEND_URL: http://192.168.99.100:8080
+    ports:
+      - "3000:3000" # Map the exposed port 80 on the container to port 9090 on the host machine
+    restart: always
+    depends_on:
+      - app-server
+    networks:
+      - frontend  
+
+  # Database Service (MongoDB)
+  db:
+    image: mongo:4
+    ports:
+      - "27017:27017"
+    restart: always
+    networks:
+      - backend  
+# Networks to be created to facilitate communication between containers
+networks:
+  backend:
+  frontend:    
