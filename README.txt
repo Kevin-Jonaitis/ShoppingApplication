@@ -18,15 +18,16 @@ developing with this specific frontend, and I had a lot of fun!
 showcase some of my backend skills, so I built a custom authenticator and password saver.
 Obviously there were easier ways to do this(using built in frameworks), but again, wanted
 to showcase my coding skills :D
-3) I used mongoDB for the DB. This scales better than SQL DBs, and our data is not complex
+3) I used mongoDB for the DB. This scales better than SQL DBs, and the data is not complex
 nor has complex queries(and probably wont be in the future) so no need for SQL.
 
 #How to run
 -go to the top level ShoppingApplication directory and run:
 docker-compose up
 -this should bring up all 3 containers(frontend, backend, db). I had some problems
-with configuring the frontend to point to the backend server; if it's not configured
-correctly, please check the ip of the docker box using:
+with configuring the frontend to point to the backend server.
+You can tell it's misconfigured because the "items" tab wont show anything. If that's the case,
+please check the ip of the docker box using:
 docker-machine ip
 and then set line 27 in the docker-compose.yml to that ip:
 #      REACT_APP_BACKEND_URL: http://<newIp>:8080
